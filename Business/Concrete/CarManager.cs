@@ -1,5 +1,8 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
+using DataAccess.DTOs;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -36,14 +39,34 @@ namespace Business.Concrete
 
         }
 
-        public List<Car> GetAll()
+        public IDataResult<List<Car>> GetAll()
         {
-            return _car.GetAll();
+            return new SuccessDataResult<List<Car>>(_car.GetAll());
+        }
+
+        public IDataResult<List<Car>> GetAllByBrandId(int id)
+        {
+            return new SuccessDataResult<List<Car>>(_car.GetAll(c => c.BrandId == id));
+        }
+
+        public IDataResult<List<Car>> GetByDailyPrice(decimal min, decimal max)
+        {
+            return new SuccessDataResult<List<Car>>(_car.GetAll(c => c.DailyPrice == min));
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarDetails()
+        {
+            if (DateTime.Now.Hour==23)
+            {
+                return new ErrorDataResult<List<CarDetailDto>>(Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<List<CarDetailDto>>(_car.GetCarDetails());
         }
 
         public void Update(Car car)
         {
             _car.Update(car);
+            
         }
     }
 }
