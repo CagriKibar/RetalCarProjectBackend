@@ -18,25 +18,21 @@ namespace Business.Concrete
         {
             _car = car;
         }
-        public void Add(Car car)
-        {
 
-            if (car.DailyPrice>0)
+        public IResult Add(Car car)
+        {
+            if (car.CarName.Length >= 2 && car.DailyPrice > 0)
             {
                 _car.Add(car);
+                return new SuccessResult();
             }
-            else
-            {
-                Console.WriteLine("Fiyat Bilgisi 0 Olamaz");
-            }
-            
-           
+            return new ErrorResult();
+
         }
 
-        public void Delete(Car car)
+        public IResult Delete(Car car)
         {
-            _car.Delete(car);
-
+            throw new NotImplementedException();
         }
 
         public IDataResult<List<Car>> GetAll()
@@ -63,10 +59,17 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarDetailDto>>(_car.GetCarDetails());
         }
 
-        public void Update(Car car)
+        public IResult Update(Car car)
         {
-            _car.Update(car);
-            
+            if (car.DailyPrice>0)
+            {
+                _car.Update(car);
+                return new SuccessResult(Messages.ProductUpdated);
+            }
+            else
+            {
+                return new ErrorResult(Messages.FailedUpdate);
+            }
         }
     }
 }
