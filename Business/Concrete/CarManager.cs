@@ -58,7 +58,7 @@ namespace Business.Concrete
         {
             if (DateTime.Now.Hour==23)
             {
-                return new ErrorDataResult<List<CarDetailDto>>(Messages.MaintenanceTime);
+                return new ErrorResult<List<CarDetailDto>>(Messages.MaintenanceTime);
             }
             return new SuccessDataResult<List<CarDetailDto>>(_car.GetCarDetails());
         }

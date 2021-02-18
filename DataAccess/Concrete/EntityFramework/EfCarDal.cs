@@ -25,12 +25,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  CarId=p.CarId,
                                  CarName=p.CarName,
                                  BrandName=p.BrandName,
-                                
-
-
-
-
-
+                              
 
                              };
                 return result.ToList();
