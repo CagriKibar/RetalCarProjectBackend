@@ -1,4 +1,4 @@
-﻿using Business.Abstract;
+﻿using Business.AbstractValidator;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;

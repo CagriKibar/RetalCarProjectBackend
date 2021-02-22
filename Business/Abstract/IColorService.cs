@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 using System.Text;
 
-namespace Business.Abstract
+namespace Business.AbstractValidator
 {
   public  interface IColorService
     {

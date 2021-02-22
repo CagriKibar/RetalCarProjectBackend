@@ -1,4 +1,4 @@
-using Business.Abstract;
+using Business.AbstractValidator;
 using Business.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
