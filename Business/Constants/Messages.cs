@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -16,5 +17,15 @@ namespace Business.Constants
         public static string ProductsListed = "Ürünler Listelendi";
 
         public static string ImgaesLimitError = "En fazla beş adet Resim eklenebilir.";
+
+        public static string UserNotFound = "Kullanıcı Bulunamadı";
+
+        public static string PasswordError = "Şifre Hatalı";
+
+        public static string SucccesfulLogin = "Sisteme Giriş Başarılı";
+
+        public static string UserAlreadyExists = "Bu kullanıcı mevcut";
+
+        public static string UserRegistered = "Kayıt olundu";
     }
 }
