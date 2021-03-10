@@ -1,48 +1,34 @@
 ﻿using Business.AbstractValidator;
-using Core.Entities.Concrete;
-using Core.Utilities.Results;
 using Entities.Concrete;
+using Core.Utilities.Results;
+
 using System;
 using System.Collections.Generic;
 using System.Text;
+using DataAccess.Abstract;
 
 namespace Business.Concrete
 {
     public class UserManager : IUserService
     {
-        public IResult Add(User user)
+        IUserDal _userDal;
+        public UserManager(IUserDal userDal)
         {
-            throw new NotImplementedException();
+            _userDal = userDal;
         }
-
-        public IResult Delete(User user)
+        public void Add(User user)
         {
-            throw new NotImplementedException();
-        }
-
-        public IDataResult<List<User>> GetAll()
-        {
-            throw new NotImplementedException();
+            _userDal.Add(user);
         }
 
         public User GetByMail(string email)
         {
-            throw new NotImplementedException();
-        }
-
-        public IDataResult<User> GetByUserId(int id)
-        {
-            throw new NotImplementedException();
+            return _userDal.Get(c => c.Email == email);
         }
 
         public List<OperationClaim> GetClaims(User user)
         {
-            throw new NotImplementedException();
-        }
-
-        public IResult Update(User user)
-        {
-            throw new NotImplementedException();
+            return null;
         }
     }
 }

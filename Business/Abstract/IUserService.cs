@@ -1,4 +1,4 @@
-﻿using Core.Entities.Concrete;
+﻿
 using Core.Utilities.Results;
 using Entities.Concrete;
 using System;
@@ -11,12 +11,6 @@ namespace Business.AbstractValidator
     {
         List<OperationClaim> GetClaims(User user);
         User GetByMail(string email);
-        IDataResult<List<User>> GetAll();
-        IDataResult<User> GetByUserId(int id);
-
-        IResult Add(User user);
-        IResult Update(User user);
-        IResult Delete(User user);
-
+        void Add(User user);
     }
 }

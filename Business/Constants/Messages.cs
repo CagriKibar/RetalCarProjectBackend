@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Utilities.Security.JWT;
+using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -27,5 +28,7 @@ namespace Business.Constants
         public static string UserAlreadyExists = "Bu kullanıcı mevcut";
 
         public static string UserRegistered = "Kayıt olundu";
+
+        public static string  AccessTokenCreated="Access Token Oluşturuldu";
     }
 }
