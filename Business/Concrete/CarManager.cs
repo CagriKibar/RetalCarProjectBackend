@@ -23,6 +23,7 @@ namespace Business.Concrete
             _car = car;
         }
 
+        
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {

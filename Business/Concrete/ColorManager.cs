@@ -5,6 +5,10 @@ using System.Collections.Generic;
 using Entities.Concrete;
 
 using System.Text;
+using Core.Utilities.Results;
+using Core.Aspects.Autofac.Validation;
+using Business.ValidationRules.FluentValidation;
+using Business.Constants;
 
 namespace Business.Concrete
 {
@@ -15,24 +19,35 @@ namespace Business.Concrete
         {
             _color = color;
         }
-        public void Add(Color color)
+
+        [ValidationAspect(typeof(ColorValidator))]
+        public IResult Add(Color color)
         {
             _color.Add(color);
+            return new SuccessResult(Messages.ColorAdded);
         }
 
-        public void Delete(Color color)
+        public IResult Delete(Color color)
         {
             _color.Delete(color);
+            return new  SuccessResult(Messages.ColorDeleted);
         }
 
-        public List<Color> GetAll()
+        public IDataResult<List<Color>> GetAll()
         {
-            return _color.GetAll();
+            return new SuccessDataResult<List<Color>>(_color.GetAll());
         }
 
-        public void Update(Color color)
+        public IDataResult<Color> GetById(int id)
+        {
+            return new SuccessDataResult<Color>(_color.Get(d => d.ColorId == id));
+        }
+
+        public IResult Update(Color color)
         {
             _color.Update(color);
+
+            return new SuccessResult(Messages.ColorUpdated);
         }
     }
 }

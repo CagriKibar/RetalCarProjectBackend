@@ -30,5 +30,21 @@ namespace Business.Constants
         public static string UserRegistered = "Kayıt olundu";
 
         public static string  AccessTokenCreated="Access Token Oluşturuldu";
+
+        public static string ColorAdded = "Renk Eklendi";
+
+        public static string ColorDeleted = "Renk Silindi";
+
+        public static string ColorUpdated = "Renk Güncellendi";
+
+        public static string DeletedCarImage = "Araba Resmi silindi";
+
+        public static string UserAdded = "Kullanıcı Eklendi";
+
+        public static string UserDeleted = "Kullanıcı silindi";
+
+        public static string UserListed = "Kullanıcı Listelendi";
+
+        public static string UserUpdated { get; internal set; }
     }
 }

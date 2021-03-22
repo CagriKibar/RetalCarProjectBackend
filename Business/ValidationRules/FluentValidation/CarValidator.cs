@@ -13,8 +13,7 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(p => p.CarName).NotEmpty();
             RuleFor(p => p.CarName).MinimumLength(2);
             RuleFor(p => p.DailyPrice).NotEmpty();
-            RuleFor(p => p.CarId).NotEmpty();
-            RuleFor(p => p.ColorId).NotEmpty();
+           
             
        
             RuleFor(p => p.ModelYear).LessThan(DateTime.Now.Year);

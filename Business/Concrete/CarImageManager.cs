@@ -12,15 +12,16 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Business.Concrete
 {
-    class CarImageManager : ICarImage
+    public class CarImageManager : ICarImageService
     {
         ICarImageDal _carImageDal;
-        ICarImage _carImageService;
-        public CarImageManager(ICarImageDal carImageDal, ICarImage carImageService)
+        ICarImageService _carImageService;
+        public CarImageManager(ICarImageDal carImageDal, ICarImageService carImageService)
         {
             _carImageDal = carImageDal;
             _carImageService = carImageService;
@@ -40,22 +41,23 @@ namespace Business.Concrete
 
         public IResult Delete(CarImage carImage)
         {
-            throw new NotImplementedException();
+            var oldpath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\wwwroot")) +
+                _carImageDal.Get(I => I.Id == carImage.Id).ImagePath;
+            _carImageDal.Delete(carImage);
+            return new SuccessResult(Messages.DeletedCarImage);
         }
 
         public IDataResult<CarImage> Get(int id)
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<CarImage>(_carImageDal.Get(I => I.Id == id));
         }
 
-        public IDataResult<List<CarImage>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
+      
 
-        public IDataResult<List<CarImage>> GetImagesById(int id)
+        public IDataResult<CarImage> GetImagesById(int id)
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<CarImage>(_carImageDal.Get(I => I.CarId == id));
+
         }
 
         public IResult Update(CarImage image, IFormFile file)
@@ -102,7 +104,12 @@ namespace Business.Concrete
             }
             return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(p => p.CarId == id).ToList());
         }
+
+        public IDataResult<List<CarImage>> GetAll(Expression<Func<CarImage, bool>> filter = null)
+        {
+            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(filter));
         }
+    }
     
     }
 

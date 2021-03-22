@@ -10,7 +10,12 @@ namespace Business.AbstractValidator
    public interface IUserService
     {
         List<OperationClaim> GetClaims(User user);
+        IDataResult<List<User>> GetAll();
         User GetByMail(string email);
-        void Add(User user);
+        
+        IResult Add(User user);
+        IResult Update(User user);
+        IResult Delete(User user);
+
     }
 }

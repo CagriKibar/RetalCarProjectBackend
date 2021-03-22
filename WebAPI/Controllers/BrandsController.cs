@@ -1,75 +1,72 @@
-﻿using Business.AbstractValidator;
-using Entities.Concrete;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
+using Business.Abstract;
+using Business.Concrete;
+using Entities.Concrete;
 
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CarsController : ControllerBase
+    public class BrandsController : ControllerBase
     {
+        private IBrandService _brandService;
 
-        ICarService _carService;
-        public CarsController(ICarService carService)
+        public BrandsController(IBrandService brandService)
         {
-            _carService = carService;
-
+            _brandService = brandService;
         }
 
-        
-        
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            Thread.Sleep(1000);
-            var result = _carService.GetAll();
+            
+            var result = _brandService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-        [HttpGet("getbybrand")]
-        public IActionResult GetByBrand(int brandId)
-        {
-            var result = _carService.GetAllByBrandId(brandId);
-            if (result.Success)
-            {
-                return Ok(result);
 
-            }
-            return BadRequest(result);
-        }
-
-        
+    
 
         [HttpPost("add")]
-        public IActionResult Add(Car car)
+        public IActionResult Add(Brand brand)
         {
-            var result = _carService.Add(car);
+            var result = _brandService.Add(brand);
             if (result.Success)
             {
                 return Ok(result);
-
             }
             return BadRequest(result);
         }
-        [HttpGet("getbyid")]
-        public IActionResult GetById(int id)
+
+        [HttpPost("delete")]
+        public IActionResult Delete(Brand brand)
         {
-            var result = _carService.GetAllByBrandId( id);
+            var result = _brandService.Delete(brand);
             if (result.Success)
             {
                 return Ok(result);
-
             }
             return BadRequest(result);
         }
+
+        [HttpPost("update")]
+        public IActionResult Update(Brand brand)
+        {
+            var result = _brandService.Update(brand);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
     }
 }

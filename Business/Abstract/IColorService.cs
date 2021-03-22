@@ -1,5 +1,6 @@
 ﻿
 
+using Core.Utilities.Results;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,11 @@ namespace Business.AbstractValidator
 {
   public  interface IColorService
     {
-        List<Color> GetAll();
-        void Add(Color color);
-        void Delete(Color color);
-        void Update(Color color);
+       IDataResult< List<Color>> GetAll();
+        IDataResult<Color> GetById(int id);
+        IResult Add(Color color);
+        IResult Delete(Color color);
+        IResult Update(Color color);
 
     }
 }

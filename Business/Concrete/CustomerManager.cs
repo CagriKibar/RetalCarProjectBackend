@@ -1,4 +1,8 @@
 ﻿using Business.AbstractValidator;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Results;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -8,24 +12,42 @@ namespace Business.Concrete
 {
     public class CustomerManager : ICustomerService
     {
-        public void Add(Customer customer)
+        ICustomerDal _customerDal;
+
+        public CustomerManager(ICustomerDal customerDal)
         {
-            throw new NotImplementedException();
+            _customerDal = customerDal;
+        }
+        [ValidationAspect(typeof(CustomerValidator))]
+        public IResult Add(Customer customer)
+        {
+            _customerDal.Add(customer);
+            return new SuccessResult();
         }
 
-        public void Delete(Customer customer)
+        [ValidationAspect(typeof(CustomerValidator))]
+        public IResult Delete(Customer customer)
         {
-            throw new NotImplementedException();
+            _customerDal.Delete(customer);
+            return new SuccessResult();
         }
 
-        public List<Customer> GetAll()
+        public IDataResult<List<Customer>> GetAll()
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<List<Customer>>(_customerDal.GetAll());
+
         }
 
-        public void Update(Customer customer)
+        public IDataResult<Customer> GetById(int id)
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<Customer>(_customerDal.Get(c => c.UserId == id));
+        }
+
+        [ValidationAspect(typeof(CustomerValidator))]
+        public IResult Update(Customer customer)
+        {
+             _customerDal.Update(customer);
+            return new SuccessResult();
         }
     }
 }

@@ -18,7 +18,7 @@ namespace WebAPI.Controllers
             _authService = authService;
         }
 
-        [HttpPost]
+        [HttpPost("login")]
         public ActionResult Login(UserForLoginDto userForLoginDto)
         {
             var userToLogin = _authService.Login(userForLoginDto);

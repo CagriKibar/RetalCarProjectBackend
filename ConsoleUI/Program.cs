@@ -19,11 +19,11 @@ namespace ConsoleUI
 
         private static void BrandTest()
         {
-            BrandManager brandManager = new BrandManager(new EfBrandDal());
-            foreach (var brand in brandManager.GetAll())
-            {
-                Console.WriteLine("Brand Name" + brand.BrandName);
-            }
+            //BrandManager brandManager = new BrandManager(new EfBrandDal());
+            //foreach (var brand in brandManager.GetAll())
+            //{
+            //    Console.WriteLine("Brand Name" + brand.BrandName);
+            //}
         }
 
 
@@ -31,10 +31,10 @@ namespace ConsoleUI
         private static void ColorTest()
         {
             ColorManager colorManager = new ColorManager(new EfColorDal());
-            foreach (var color in colorManager.GetAll())
-            {
-                Console.WriteLine("Color" + color.ColorName + " " + "" + color.ColorId);
-            }
+            //foreach (var color in colorManager.GetAll())
+            //{
+            //    Console.WriteLine("Color" + color.ColorName + " " + "" + color.ColorId);
+            //}
         }
 
         private static void CarTest()

@@ -37,10 +37,11 @@ namespace WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-           
+
             //services.AddSingleton<ICarService, CarManager>();
             //services.AddSingleton<ICarDal, EfCarDal>();
 
+            services.AddCors();
 
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
@@ -69,9 +70,12 @@ namespace WebAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(builder=>builder.WithOrigins("http://localhost:1453").AllowAnyHeader());
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
             app.UseAuthentication();
 
             app.UseAuthorization();

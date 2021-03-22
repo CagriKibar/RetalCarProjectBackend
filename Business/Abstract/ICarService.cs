@@ -16,7 +16,6 @@ namespace Business.AbstractValidator
         IResult Add(Car car);
         IResult Delete(Car car);
         IResult Update(Car car);
-
         
     }
 }

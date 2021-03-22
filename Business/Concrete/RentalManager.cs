@@ -45,7 +45,9 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
-        public IDataResult<Rental> GetById()
+
+
+        public IDataResult<Rental> GetById(int id)
         {
             throw new NotImplementedException();
         }

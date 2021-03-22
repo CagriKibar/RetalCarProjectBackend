@@ -5,65 +5,26 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CarsController : ControllerBase
+    public class RentalsController : ControllerBase
     {
+        IRentalService _rentalService;
 
-        ICarService _carService;
-        public CarsController(ICarService carService)
+        public RentalsController(IRentalService rentalService)
         {
-            _carService = carService;
+            _rentalService = rentalService;
 
         }
 
-        
-        
-        [HttpGet("getall")]
-        public IActionResult GetAll()
-        {
-            Thread.Sleep(1000);
-            var result = _carService.GetAll();
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-        [HttpGet("getbybrand")]
-        public IActionResult GetByBrand(int brandId)
-        {
-            var result = _carService.GetAllByBrandId(brandId);
-            if (result.Success)
-            {
-                return Ok(result);
-
-            }
-            return BadRequest(result);
-        }
-
-        
-
-        [HttpPost("add")]
-        public IActionResult Add(Car car)
-        {
-            var result = _carService.Add(car);
-            if (result.Success)
-            {
-                return Ok(result);
-
-            }
-            return BadRequest(result);
-        }
         [HttpGet("getbyid")]
         public IActionResult GetById(int id)
         {
-            var result = _carService.GetAllByBrandId( id);
+            var result = _rentalService.GetById(id);
             if (result.Success)
             {
                 return Ok(result);
@@ -71,5 +32,52 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
+        [HttpGet("getall")]
+        public IActionResult GetAll()
+        {
+
+            var result = _rentalService.GetAll();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpPost("add")]
+        public IActionResult Add(Rental rental)
+        {
+            var result = _rentalService.Add(rental);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpPost("delete")]
+        public IActionResult Delete(Rental rental)
+        {
+            var result = _rentalService.Delete(rental);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpPost("update")]
+        public IActionResult Update(Rental rental)
+        {
+            var result = _rentalService.Update(rental);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+
     }
 }

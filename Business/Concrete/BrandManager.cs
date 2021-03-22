@@ -1,4 +1,8 @@
-﻿using Business.AbstractValidator;
+﻿using Business.Abstract;
+using Business.AbstractValidator;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -14,33 +18,39 @@ namespace Business.Concrete
         {
             _brand = brand;
         }
-        public void Add(Brand brand)
-        {
-            if (brand.BrandName.Length>=2)
-            {
-                _brand.Add(brand);
 
-            }
-            else
-            {
-                Console.WriteLine("Marka ismi hatalı veya iki karakterden az girdiniz...");
-            }
+        [ValidationAspect(typeof(BrandValidator))]
+        public IResult Add(Brand brand)
+        {
+            _brand.Add(brand);
+            return new SuccessResult();
         }
 
-        public void Delete(Brand brand)
+        [ValidationAspect(typeof(BrandValidator))]
+        public IResult Delete(Brand brand)
         {
             _brand.Delete(brand);
-
+            return new SuccessResult();
         }
 
-        public List<Brand> GetAll()
+        
+
+        public IDataResult<List<Brand>> GetAll()
         {
-            return _brand.GetAll();
+            return new SuccessDataResult<List<Brand>>(_brand.GetAll());
         }
 
-        public void Update(Brand brand)
+        public IDataResult<Brand> GetById(int id)
         {
+            return new  SuccessDataResult<Brand>(_brand.Get(b => b.BrandId == id));
+        }
+
+        [ValidationAspect(typeof(BrandValidator))]
+        public IResult Update(Brand brand)
+        {
+
             _brand.Update(brand);
+            return new SuccessResult();
         }
     }
 }
