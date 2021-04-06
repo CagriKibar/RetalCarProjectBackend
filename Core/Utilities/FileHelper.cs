@@ -32,7 +32,7 @@ namespace Core.Utilities.Helpers
             {
             string path2 = Environment.CurrentDirectory + @"\wwwroot";
 
-            File.Delete(path2+path);
+            File.Delete(path2 + path);
             //try
             //    {
             //        File.Delete(path);
@@ -42,9 +42,10 @@ namespace Core.Utilities.Helpers
             //        return new ErrorResult(e.Message);
             //    }
             //    return new SuccessResult();
-            }
+        }
 
-            public static string Update(string sourcePath, IFormFile file)
+
+        public static string Update(string sourcePath, IFormFile file)
             {
                 var result = Add(file);
                 if (sourcePath.Length > 0)
