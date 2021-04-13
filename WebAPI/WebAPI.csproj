@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\Images1\**" />
+    <Content Remove="wwwroot\Images1\**" />
+    <EmbeddedResource Remove="wwwroot\Images1\**" />
+    <None Remove="wwwroot\Images1\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.12" />
   </ItemGroup>
@@ -17,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Images\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
