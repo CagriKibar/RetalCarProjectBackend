@@ -81,6 +81,12 @@ namespace Business.Constants
         public static string CanNotBeBlank = "Boş Bırakılamaz";
         public static string InvalidEmailAddress = "Geçersiz E-Mail Formatı";
 
+        public static string RentalListed = "Kiralama Listesi Getirildi.";
+
+        public static object RentalIdGet = "Kiralama İd'si Listelendi";
+
+        public static string RentalUpdated = "Kiralama Güncellendi";
+
 
 
         ////Güvenlik Mesajları
